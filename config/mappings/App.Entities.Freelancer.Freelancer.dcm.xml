@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Entities\Freelancer\Freelancer" table="freelancer">
+        <id name="uuid" type="string" column="id">
+            <generator strategy="NONE"/>
+        </id>
+
+        <field name="rememberToken" column="remember_token"/>
+
+        <embedded name="email" class="App\ValueObjects\Email" use-column-prefix="false"/>
+        <embedded name="password" class="App\ValueObjects\Password" use-column-prefix="false"/>
+        <embedded name="hourRate" class="App\ValueObjects\Money" use-column-prefix="false"/>
+
+        <one-to-many field="proposals" target-entity="App\Entities\Proposal\Proposal" mapped-by="freelancer"/>
+    </entity>
+</doctrine-mapping>

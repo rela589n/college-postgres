@@ -1,0 +1,26 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Entities\Proposal\Proposal" table="proposals">
+        <id name="uuid" type="string" column="id">
+            <generator strategy="NONE"/>
+        </id>
+
+        <embedded name="coverLetter" class="App\ValueObjects\CoverLetter" use-column-prefix="false"/>
+        <embedded name="estimatedTime" class="App\ValueObjects\EstimatedTime" use-column-prefix="false"/>
+        <embedded name="status" class="App\ValueObjects\ProposalStatus" use-column-prefix="false"/>
+
+        <many-to-one field="job" target-entity="App\Entities\Job\Job" inversed-by="proposals">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+        <many-to-one field="freelancer" target-entity="App\Entities\Freelancer\Freelancer" inversed-by="proposals"
+                     fetch="EAGER">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

@@ -1,0 +1,21 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Entities\Job\Job" table="jobs">
+        <id name="uuid" type="string" column="id">
+            <generator strategy="NONE"/>
+        </id>
+
+        <embedded name="title" class="App\ValueObjects\JobTitle" use-column-prefix="false"/>
+        <embedded name="description" class="App\ValueObjects\JobDescription" use-column-prefix="false"/>
+        <embedded name="status" class="App\ValueObjects\JobStatus" use-column-prefix="false"/>
+
+        <many-to-one field="customer" target-entity="App\Entities\Customer\Customer" inversed-by="postedJobs">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+        <one-to-many field="proposals" target-entity="App\Entities\Proposal\Proposal" mapped-by="job"/>
+    </entity>
+</doctrine-mapping>
