@@ -27,12 +27,22 @@ abstract class Filter
         return true;
     }
 
+    protected function applyOrders(array $enabledOrderings, QueryBuilder $builder): void
+    {
+        foreach ($enabledOrderings as $field => $ordering) {
+            $builder->addOrderBy($field, $ordering);
+        }
+    }
+
     public function filterQuery(QueryBuilder $builder): QueryBuilder
     {
         $this->applyFilters($this->enabledFilters(), $builder);
+        $this->applyOrders($this->enabledOrderings(), $builder);
 
         return $builder;
     }
 
     abstract protected function enabledFilters(): array;
+
+    abstract protected function enabledOrderings(): array;
 }

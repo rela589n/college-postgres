@@ -28,6 +28,9 @@ final class JobsController
         $offers = $this->repository->filteredJobs(
             array_filter(
                 Arr::wrap($request->filters)
+            ),
+            array_keys(
+                Arr::wrap($request->desc)
             )
         );
 

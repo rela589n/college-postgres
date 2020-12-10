@@ -55,5 +55,5 @@ interface JobsRepository
      * @param  array  $filters
      * @return Collection|Job[]
      */
-    public function filteredJobs(array $filters): Collection;
+    public function filteredJobs(array $filters, array $descending): Collection;
 }

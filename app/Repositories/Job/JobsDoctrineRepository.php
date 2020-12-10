@@ -120,13 +120,13 @@ final class JobsDoctrineRepository implements JobsRepository
         return new ArrayCollection($query->getResult());
     }
 
-    public function filteredJobs(array $filters): Collection
+    public function filteredJobs(array $filters, array $descending): Collection
     {
         $builder = EntityManager::createQueryBuilder()
             ->select('job')
             ->from(Job::class, 'job');
 
-        $filter = new JobsDoctrineFilter($filters);
+        $filter = new JobsDoctrineFilter($filters, $descending);
         $filter->filterQuery($builder);
 
         $query = $builder->getQuery();

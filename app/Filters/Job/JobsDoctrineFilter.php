@@ -10,10 +10,12 @@ use Doctrine\ORM\QueryBuilder;
 final class JobsDoctrineFilter extends Filter
 {
     private array $filters;
+    private array $descending;
 
-    public function __construct(array $filters)
+    public function __construct(array $filters, array $descending)
     {
         $this->filters = $filters;
+        $this->descending = $descending;
     }
 
     protected function enabledFilters(): array
@@ -33,5 +35,13 @@ final class JobsDoctrineFilter extends Filter
         $builder->andWhere('job.description.description LIKE :job_description_param');
 
         $builder->setParameter('job_description_param', "%$description%");
+    }
+
+    protected function enabledOrderings(): array
+    {
+        return [
+            'job.title.title'             => in_array('title', $this->descending, true) ? 'DESC' : 'ASC',
+            'job.description.description' => in_array('description', $this->descending, true) ? 'DESC' : 'ASC',
+        ];
     }
 }
