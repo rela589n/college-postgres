@@ -7,11 +7,11 @@ namespace App\Repositories\Job;
 use App\Entities\Job\Job;
 use App\Entities\Job\JobsRepository;
 use App\Exceptions\Entities\JobNotFoundException;
+use App\Filters\Job\JobsDoctrineFilter;
 use App\ValueObjects\JobStatus;
 use App\ValueObjects\ProposalStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ObjectRepository;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 
@@ -117,6 +117,20 @@ final class JobsDoctrineRepository implements JobsRepository
 
 //        dump($query->getSQL());
 //        dd($query->getResult(AbstractQuery::HYDRATE_SCALAR));
+        return new ArrayCollection($query->getResult());
+    }
+
+    public function filteredJobs(array $filters): Collection
+    {
+        $builder = EntityManager::createQueryBuilder()
+            ->select('job')
+            ->from(Job::class, 'job');
+
+        $filter = new JobsDoctrineFilter($filters);
+        $filter->filterQuery($builder);
+
+        $query = $builder->getQuery();
+
         return new ArrayCollection($query->getResult());
     }
 }

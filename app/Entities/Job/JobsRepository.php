@@ -50,4 +50,10 @@ interface JobsRepository
      * @return Collection|Job[]
      */
     public function inWorkByFreelancer(string $freelancerId): Collection;
+
+    /**
+     * @param  array  $filters
+     * @return Collection|Job[]
+     */
+    public function filteredJobs(array $filters): Collection;
 }

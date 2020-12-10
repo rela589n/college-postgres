@@ -9,6 +9,7 @@ use App\UseCases\Freelancer\Jobs\FinishJobCommand;
 use App\UseCases\Freelancer\Jobs\FinishJobDto;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
 final class JobsController
@@ -24,10 +25,16 @@ final class JobsController
 
     public function index(Request $request): View
     {
+        $offers = $this->repository->filteredJobs(
+            array_filter(
+                Arr::wrap($request->filters)
+            )
+        );
+
         return view(
             'pages.freelancer.dashboard.offers.index',
             [
-                'offers' => $this->repository->findAll()
+                'offers' => $offers,
             ]
         );
     }

@@ -14,5 +14,10 @@
     <x-grid.dashboard.main>
         <x-texts.h1>{{ trans('texts.dashboard.offers.index.title') }}</x-texts.h1>
         <x-entities.offers.table-for-freelancers :jobs="$offers"/>
+        <form method="GET">
+            <input class="mr-5" type="text" name="filters[title]" value="{{ request('filters.title') }}">
+            <input class="mx-5" type="text" name="filters[description]" value="{{ request('filters.description') }}">
+            <input type="submit" value="Filter">
+        </form>
     </x-grid.dashboard.main>
 @endsection
