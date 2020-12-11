@@ -45,7 +45,7 @@ final class JobsController
     public function appliedOn()
     {
         return view(
-            'pages.freelancer.dashboard.offers.index',
+            'pages.freelancer.dashboard.offers.applied-on',
             [
                 'offers' => $this->repository->findFreelancerAppliedOn($this->guard->id())
             ]
@@ -55,7 +55,7 @@ final class JobsController
     public function finished()
     {
         return view(
-            'pages.freelancer.dashboard.offers.index',
+            'pages.freelancer.dashboard.offers.finished',
             [
                 'offers' => $this->repository->finishedByFreelancer($this->guard->id())
             ]
