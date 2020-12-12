@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4",
         "ext-json": "*",
+        "barryvdh/laravel-dompdf": "^0.8.7",
         "doctrine/inflector": "^1.4",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -21,7 +22,9 @@
         "laravel/tinker": "^2.5",
         "mpdf/mpdf": "^8.0",
         "mstaack/laravel-postgis": "^5.2",
-        "spatie/laravel-translatable": "^4.5"
+        "phpoffice/phpword": "^0.17.0",
+        "spatie/laravel-translatable": "^4.5",
+        "spipu/html2pdf": "^5.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
