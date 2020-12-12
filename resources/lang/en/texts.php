@@ -133,6 +133,7 @@ return [
                 'proposals-list' => 'List of proposals:',
 
                 'edit-btn' => 'Edit',
+                'generate-report' => 'Report',
 
                 'name'        => 'Name',
                 'description' => 'Description',

@@ -14,6 +14,10 @@
     <x-grid.dashboard.main>
         <x-texts.h1 class="text-center">
             {{ trans('texts.dashboard.offers.show.title') }}
+            <x-buttons.link.main class="ml-4"
+                                 href="{{ action(\App\Http\Controllers\Api\Job\GenerateJobDetailsPdfReport::class, $job->getId()) }}">
+                {{ trans('texts.dashboard.offers.show.generate-report') }}
+            </x-buttons.link.main>
         </x-texts.h1>
 
         <div class="row">
@@ -41,7 +45,8 @@
         </x-proposals.list-for-f>
 
         @if ($authUser->can('fCreate', [\App\Entities\Proposal\Proposal::class, $job]))
-            <x-buttons.link.action.main class="btn-primary" :href="route('freelancer.dashboard.proposals.create', $job->getId())">
+            <x-buttons.link.action.main class="btn-primary"
+                                        :href="route('freelancer.dashboard.proposals.create', $job->getId())">
                 {{ trans('texts.dashboard.proposals.create') }}
             </x-buttons.link.action.main>
         @endif
